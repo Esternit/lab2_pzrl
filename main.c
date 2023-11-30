@@ -35,10 +35,12 @@ Nums get_values(char *str)
     temp = strtok (str," ");
     firststr = temp;
     int count =0;
+    
 
     while (temp != NULL)
     {
         temp= strtok (NULL," ");
+        
         if(count == 0)
         {
             operation = temp;
@@ -53,6 +55,7 @@ Nums get_values(char *str)
         
         
     }
+    
     Nums obj;
     strcpy(obj.first,firststr);
     strcpy(obj.second,secondstr);
@@ -89,12 +92,17 @@ int convert_to_tenth(char *str,int base)
     char value[3];
     int power = 0;
     int temp;
+    
     for(int i = strlen(str)-1; i >= 0;i--)
     {
         if(!isdigit(str[i]))
         {
-            itoa(indexof(str[i]),value,10);
-            res = res + atoi(value)*pow(base,power);
+            if(str[i] != 'x')
+            {
+                itoa(indexof(str[i]),value,10);
+                res = res + atoi(value)*pow(base,power);
+            }
+
         }
         else
         {
@@ -203,9 +211,13 @@ int check_is_sixteen(char* str)
     int length = strlen(str);
     int count_space = 0;
     int just_switched = 0;
+    int find = 0;
     for(int i = 0;i < length;i++)
     {
-
+        if(str[i] == 'x')
+        {
+            find = 1;
+        }
         if((count_space == 0 || count_space == 2) && !(isspace(str[i])))
         {
             if(just_switched == 0)
@@ -240,21 +252,145 @@ int check_is_sixteen(char* str)
         }
 
     }
-    if (count_space != 2)
+    if (count_space != 2 || find == 0)
     {
         return 1;
     }
     return 0;
 }
 
+void printer(int base,int result)
+{
+    if(base == 8)
+    {
+        if(result < 0)
+        {
+            result = ~result + 1;
+            printf("-%o (-%d)",result,result);
+        }
+        else
+        {
+            printf("%o (%d)",result,result);
+        }        
+    }
+    else if(base == 16)
+    {
+        if(result < 0)
+        {
+            result = ~result + 1;
+            printf("-0x%X (-%d)",result,result);
+        }
+        else
+        {
+            printf("0x%X (%d)",result,result);
+        }
+    }
+    else
+    {
+        if(result < 0)
+        {
+            result = ~result + 1;
+            char res[sizeof(result)];
+            printf("-%s (-%d)", itoa(result,res,2),result);
+        }
+        else
+        {
+            char res[sizeof(result)];
+            printf("%s (%d)", itoa(result,res,2),result);
+        }
+    }
+}
 
 void addition(Nums args,int base)
 {
     int first = convert_to_tenth(args.first,base);
     int second = convert_to_tenth(args.second,base);
+    
     int result = first + second;
+    printf("%d %d %d %d\n",first,second, result,base);
+    printer(base,result);
+
 
 }
+
+void subsraction(Nums args,int base)
+{
+    int first = convert_to_tenth(args.first,base);
+    int second = convert_to_tenth(args.second,base);
+    printf("%s\n",args.first);
+    
+    int result = first - second;
+    printer(base,result);
+    
+}
+
+void multiplication(Nums args,int base)
+{
+    int first = convert_to_tenth(args.first,base);
+    int second = convert_to_tenth(args.second,base);
+    printf("%s\n",args.first);
+    
+    int result = first * second;
+    printer(base,result);
+    
+}
+
+void percentage(Nums args,int base)
+{
+    int first = convert_to_tenth(args.first,base);
+    int second = convert_to_tenth(args.second,base);
+    printf("%s\n",args.first);
+    
+    int result = first % second;
+    printer(base,result);
+    
+}
+
+void ander(Nums args,int base)
+{
+    int first = convert_to_tenth(args.first,base);
+    int second = convert_to_tenth(args.second,base);
+    printf("%s\n",args.first);
+    
+    int result = first & second;
+    printer(base,result);
+    
+}
+
+void orer(Nums args,int base)
+{
+    int first = convert_to_tenth(args.first,base);
+    int second = convert_to_tenth(args.second,base);
+    printf("%s\n",args.first);
+    
+    int result = first | second;
+    printer(base,result);
+    
+}
+
+void xorer(Nums args,int base)
+{
+    int first = convert_to_tenth(args.first,base);
+    int second = convert_to_tenth(args.second,base);
+    printf("%s\n",args.first);
+    
+    int result = first ^ second;
+    printer(base,result);
+    
+}
+
+void noter(Nums args,int base)
+{
+    int first = convert_to_tenth(args.first,base);
+    printf("%s\n",args.first);
+    
+    int result = ~first;
+    printf("NOTER: %s %c %d %d\n",args.first,args.operation,result,first,base);
+    printer(base,result);
+    
+}
+
+
 
 int main(int args, char ** kvargs)
 {
@@ -262,23 +398,22 @@ int main(int args, char ** kvargs)
     printf("Input operation: ");
     gets(operation);
     printf("%s %d %c\n",operation,strlen(operation),operation[3]);
-    printf("%d\n", check_is_sixteen(operation));
     enum eOperations operator;
     Nums res;
     int base;
-    if(check_is_double(operation))
+    if(check_is_double(operation) == 0)
     {
         base = 2;
     }
-    else if(check_is_eight(operation))
+    else if(check_is_eight(operation) == 0)
     {
         base = 8;
     }
-    else if(check_is_sixteen(operation))
+    else if(check_is_sixteen(operation) == 0)
     {
         base = 16;
     }
-    else
+    else if(operation[0] != '~')
     {
         printf("Systems do not match");
         return 1;
@@ -289,11 +424,11 @@ int main(int args, char ** kvargs)
         res = get_values(operation);
         operator =res.operation[0];
         
-        printf("%d",operator);
     }
     else
     {
         char *temp;
+        base = 2;
         if(operation[0] != '~' || operation[1] == ' ')
         {
             printf("Not valid unput");
@@ -309,28 +444,28 @@ int main(int args, char ** kvargs)
     switch (operator)
     {
     case PLUS:
-        /* code */
+        addition(res,base);
         break;
     case MINUS:
-        /* code */
+        subsraction(res,base);
         break;
     case MULTIPLIC:
-        /* code */
+        multiplication(res,base);
         break;
     case PERCENT:
-        /* code */
+        percentage(res,base);
         break;
     case AND:
-        /* code */
+        ander(res,base);
         break;
     case OR:
-        /* code */
+        orer(res,base);
         break;
     case XOR:
-        /* code */
+        xorer(res,base);
         break;
     case NOT:
-        /* code */
+        noter(res,base);
         break;
     default:
         printf("Operation not identified");
