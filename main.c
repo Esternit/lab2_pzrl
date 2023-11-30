@@ -4,6 +4,19 @@
 #include <string.h>
 #include <ctype.h> 
 
+enum eOperations
+{
+    PLUS = 43,
+    MINUS = 45,
+    MULTIPLIC = 42,
+    PERCENT = 37,
+    AND = 38,
+    OR = 124,
+    XOR = 94,
+    NOT = 126
+
+};
+
 const char eight[] = {'0','1','2','3','4','5','6','7'};
 const char sixteen[] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
 
@@ -70,7 +83,7 @@ int indexof(int c)
     }
     return -1;
 }
-void convert_to_tenth(char *str,int base)
+int convert_to_tenth(char *str,int base)
 {
     int res=0;
     char value[3];
@@ -92,7 +105,7 @@ void convert_to_tenth(char *str,int base)
         power++;
 
     }
-    itoa(res,str,10);
+    return res;
 }
 int check_in_mas(int c, int type)
 {
@@ -235,6 +248,14 @@ int check_is_sixteen(char* str)
 }
 
 
+void addition(Nums args,int base)
+{
+    int first = convert_to_tenth(args.first,base);
+    int second = convert_to_tenth(args.second,base);
+    int result = first + second;
+
+}
+
 int main(int args, char ** kvargs)
 {
     char operation[30];
@@ -242,7 +263,79 @@ int main(int args, char ** kvargs)
     gets(operation);
     printf("%s %d %c\n",operation,strlen(operation),operation[3]);
     printf("%d\n", check_is_sixteen(operation));
-    Nums res = get_values(operation);
-    printf("%s %s %s\n",res.first,res.second,res.operation);
+    enum eOperations operator;
+    Nums res;
+    int base;
+    if(check_is_double(operation))
+    {
+        base = 2;
+    }
+    else if(check_is_eight(operation))
+    {
+        base = 8;
+    }
+    else if(check_is_sixteen(operation))
+    {
+        base = 16;
+    }
+    else
+    {
+        printf("Systems do not match");
+        return 1;
+    }
+
+    if(operation[0] != '~')
+    {
+        res = get_values(operation);
+        operator =res.operation[0];
+        
+        printf("%d",operator);
+    }
+    else
+    {
+        char *temp;
+        if(operation[0] != '~' || operation[1] == ' ')
+        {
+            printf("Not valid unput");
+            return 1;
+        }
+        temp = strtok (operation,"~");
+        strcpy(res.first,temp);
+        strcpy(res.operation,"~");
+        strcpy(res.second,"No");
+        operator = 126;
+        printf("%s %s", res.first,res.operation);
+    }
+    switch (operator)
+    {
+    case PLUS:
+        /* code */
+        break;
+    case MINUS:
+        /* code */
+        break;
+    case MULTIPLIC:
+        /* code */
+        break;
+    case PERCENT:
+        /* code */
+        break;
+    case AND:
+        /* code */
+        break;
+    case OR:
+        /* code */
+        break;
+    case XOR:
+        /* code */
+        break;
+    case NOT:
+        /* code */
+        break;
+    default:
+        printf("Operation not identified");
+        break;
+    }
+
     return 0;
 }
