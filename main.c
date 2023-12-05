@@ -14,7 +14,6 @@ int main(int args, char ** kvargs)
     char operation[30];
     printf("Input operation: ");
     gets(operation);
-    printf("%s %d %c\n",operation,strlen(operation),operation[3]);
     enum eOperations operator;
     Nums res;
     int base;
@@ -56,7 +55,6 @@ int main(int args, char ** kvargs)
         strcpy(res.operation,"~");
         strcpy(res.second,"No");
         operator = 126;
-        printf("%s %s", res.first,res.operation);
     }
     switch (operator)
     {

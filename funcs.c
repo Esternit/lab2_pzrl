@@ -286,7 +286,6 @@ void addition(Nums args,int base)
     int second = convert_to_tenth(args.second,base);
     
     int result = first + second;
-    printf("%d %d %d %d\n",first,second, result,base);
     printer(base,result);
 
 
@@ -296,7 +295,6 @@ void subsraction(Nums args,int base)
 {
     int first = convert_to_tenth(args.first,base);
     int second = convert_to_tenth(args.second,base);
-    printf("%s\n",args.first);
     
     int result = first - second;
     printer(base,result);
@@ -307,7 +305,6 @@ void multiplication(Nums args,int base)
 {
     int first = convert_to_tenth(args.first,base);
     int second = convert_to_tenth(args.second,base);
-    printf("%s\n",args.first);
     
     int result = first * second;
     printer(base,result);
@@ -318,8 +315,6 @@ void percentage(Nums args,int base)
 {
     int first = convert_to_tenth(args.first,base);
     int second = convert_to_tenth(args.second,base);
-    printf("%s\n",args.first);
-    
     int result = first % second;
     printer(base,result);
     
@@ -329,7 +324,6 @@ void ander(Nums args,int base)
 {
     int first = convert_to_tenth(args.first,base);
     int second = convert_to_tenth(args.second,base);
-    printf("%s\n",args.first);
     
     int result = first & second;
     printer(base,result);
@@ -340,7 +334,6 @@ void orer(Nums args,int base)
 {
     int first = convert_to_tenth(args.first,base);
     int second = convert_to_tenth(args.second,base);
-    printf("%s\n",args.first);
     
     int result = first | second;
     printer(base,result);
@@ -351,7 +344,6 @@ void xorer(Nums args,int base)
 {
     int first = convert_to_tenth(args.first,base);
     int second = convert_to_tenth(args.second,base);
-    printf("%s\n",args.first);
     
     int result = first ^ second;
     printer(base,result);
@@ -361,10 +353,8 @@ void xorer(Nums args,int base)
 void noter(Nums args,int base)
 {
     int first = convert_to_tenth(args.first,base);
-    printf("%s\n",args.first);
     
     int result = ~first;
-    printf("NOTER: %s %c %d %d\n",args.first,args.operation,result,first,base);
     printer(base,result);
     
 }
