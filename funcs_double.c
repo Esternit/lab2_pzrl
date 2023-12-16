@@ -65,7 +65,7 @@ int convert_to_tenth(char *str,int base)
             if(str[i] != 'x')
             {
                 itoashka(indexof(str[i]),value,10);
-                res = res + atoi(value)*pow(base,power);
+                res = res + atoi(value)*powerer(base,power);
             }
 
         }
