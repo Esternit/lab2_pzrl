@@ -15,10 +15,11 @@ int main(int args, char ** kvargs)
 {
     char operation[30];
     printf("Input operation: ");
-    gets(operation);
+    fgets(operation,50,stdin);
     enum eOperations operator;
     Nums res;
     int base;
+    strtok(operation,"\n");
     if(check_is_double(operation) == 0)
     {
         base = 2;

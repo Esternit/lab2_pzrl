@@ -64,7 +64,7 @@ int convert_to_tenth(char *str,int base)
         {
             if(str[i] != 'x')
             {
-                itoa(indexof(str[i]),value,10);
+                itoashka(indexof(str[i]),value,10);
                 res = res + atoi(value)*pow(base,power);
             }
 
@@ -143,12 +143,12 @@ void printer(int base,int result)
         {
             result = ~result + 1;
             char res[sizeof(result)];
-            printf("-%s (-%d)", itoa(result,res,2),result);
+            printf("-%s (-%d)", itoashka(result,res,2),result);
         }
         else
         {
             char res[sizeof(result)];
-            printf("%s (%d)", itoa(result,res,2),result);
+            printf("%s (%d)", itoashka(result,res,2),result);
         }
     }
 }

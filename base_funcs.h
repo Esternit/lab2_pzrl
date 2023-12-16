@@ -6,5 +6,6 @@
 #include <string.h>
 #include <ctype.h>
 int check_in_mas(int c, int type);
+char* itoashka(int value, char* result, int base);
 
 #endif
