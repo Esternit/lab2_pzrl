@@ -3,7 +3,9 @@
 #include <math.h>
 #include <string.h>
 #include <ctype.h>
-#include "funcs.h"
+#include "funcs_double.h"
+#include "funcs_eight.h"
+#include "funcs_sixteen.h"
 
 
 

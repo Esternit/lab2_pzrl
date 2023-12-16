@@ -1,9 +1,6 @@
-#include "funcs.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <string.h>
-#include <ctype.h> 
+#include "funcs_double.h"
+#include "base_funcs.h"
+
 
 Nums get_values(char *str)
 {
@@ -53,18 +50,7 @@ int powerer(int base,int exponent)
     return result;
 }
 
-int indexof(int c)
-{
-    
-    for(int i = 0;i < 16;i++)
-    {
-        if(c == sixteen[i])
-        {
-            return i;
-        }
-    }
-    return -1;
-}
+
 int convert_to_tenth(char *str,int base)
 {
     int res=0;
@@ -94,30 +80,7 @@ int convert_to_tenth(char *str,int base)
     }
     return res;
 }
-int check_in_mas(int c, int type)
-{
-    if(type == 0)
-    {
-        for(int i = 0;i < 8; i++)
-        {
-            if(eight[i] == c)
-            {
-                return 0;
-            }
-        }
-    }
-    if(type == 1)
-    {
-        for(int i = 0;i < 16; i++)
-        {
-            if(sixteen[i] == c)
-            {
-                return 0;
-            }
-        }
-    }
-    return 1;
-}
+
 
 int check_is_double(char* str)
 {
@@ -145,98 +108,8 @@ int check_is_double(char* str)
     return 0;
 }
 
-int check_is_eight(char* str)
-{
-    int length = strlen(str);
-    int count_space = 0;
-    int just_switched = 0;
-    for(int i = 0;i < length;i++)
-    {
-        if((count_space == 0 || count_space == 2) && !(isspace(str[i])))
-        {
-            if(just_switched == 0)
-            {
-                if(str[i] != '0')
-                {
-                    return 1;
-                }
-                just_switched = 1;
-            }
-            else
-            {
-                if(check_in_mas(str[i],0) == 1)
-                {
-                    return 1;
-                }
-            }
 
-        }
-        if(isspace(str[i]))
-        {
-            count_space = count_space + 1;
-            just_switched = 0;
-        }
 
-    }
-    if (count_space != 2)
-    {
-        return 1;
-    }
-    return 0;
-}
-
-int check_is_sixteen(char* str)
-{
-    int length = strlen(str);
-    int count_space = 0;
-    int just_switched = 0;
-    int find = 0;
-    for(int i = 0;i < length;i++)
-    {
-        if(str[i] == 'x')
-        {
-            find = 1;
-        }
-        if((count_space == 0 || count_space == 2) && !(isspace(str[i])))
-        {
-            if(just_switched == 0)
-            {
-                if(str[i] != '0')
-                {
-                    return 1;
-                }
-                just_switched = 1;
-            }
-            else if(just_switched == 1)
-            {
-                if(str[i] != 'x')
-                {
-                    return 1;
-                }
-                just_switched = 2;
-            }
-            else
-            {
-                if(check_in_mas(str[i],1) == 1)
-                {
-                    return 1;
-                }
-            }
-
-        }
-        if(isspace(str[i]))
-        {
-            count_space = count_space + 1;
-            just_switched = 0;
-        }
-
-    }
-    if (count_space != 2 || find == 0)
-    {
-        return 1;
-    }
-    return 0;
-}
 
 void printer(int base,int result)
 {

@@ -1,11 +1,29 @@
-.PHONY: compile run clean
+.PHONY: all clean run
 
 OUT_FILE = out.exe
-WORKING_FILES = main.c funcs.c
 
-compile: $(WORKING_FILES)
-	gcc $(WORKING_FILES) -o $(OUT_FILE)
-run: compile
+
+all: $(OUT_FILE)
+
+main.o: main.c
+	gcc -c main.c
+
+funcs_double.o: funcs_double.c
+	gcc -c funcs_double.c
+
+funcs_eight.o: funcs_eight.c
+	gcc -c funcs_eight.c
+
+funcs_sixteen.o: funcs_sixteen.c
+	gcc -c funcs_sixteen.c
+
+base_funcs.o: base_funcs.c 
+	gcc -c base_funcs.c
+
+run: $(OUT_FILE)
 	./$(OUT_FILE)
 clean:
 	rm *.o $(OUT_FILE)
+
+$(OUT_FILE): main.o funcs_double.o funcs_eight.o funcs_sixteen.o base_funcs.o
+	gcc main.o funcs_double.o funcs_eight.o funcs_sixteen.o base_funcs.o -o $(OUT_FILE)

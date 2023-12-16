@@ -1,5 +1,10 @@
 #ifndef FUNCS_H
 #define FUNCS_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
+#include <ctype.h> 
 enum eOperations
 {
     PLUS = 43,
@@ -13,8 +18,7 @@ enum eOperations
 
 };
 
-const char eight[] = {'0','1','2','3','4','5','6','7'};
-const char sixteen[] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
+
 
 typedef struct{
     char first[30];
@@ -25,10 +29,8 @@ Nums get_values(char *str);
 int powerer(int base,int exponent);
 int indexof(int c);
 int convert_to_tenth(char *str,int base);
-int check_in_mas(int c, int type);
+
 int check_is_double(char* str);
-int check_is_eight(char* str);
-int check_is_sixteen(char* str);
 void printer(int base,int result);
 void addition(Nums args,int base);
 void subsraction(Nums args,int base);
