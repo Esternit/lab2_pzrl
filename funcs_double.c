@@ -228,6 +228,9 @@ void noter(Nums args,int base)
     int first = convert_to_tenth(args.first,base);
     
     int result = ~first;
-    printer(base,result);
+    int doubler = result;
+    char res[sizeof(result)];
+    itoashka(result,res,2);
+    printf("%s (%d)",res,result);
     
 }
