@@ -3,7 +3,7 @@
 #include <math.h>
 #include <string.h>
 #include <ctype.h>
-#include "funcs_double.h"
+#include "funcs_binary.h"
 #include "funcs_eight.h"
 #include "funcs_sixteen.h"
 
@@ -20,7 +20,7 @@ int main(int args, char ** kvargs)
     Nums res;
     int base;
     strtok(operation,"\n");
-    if(check_is_double(operation) == 0)
+    if(check_is_binary(operation) == 0)
     {
         base = 2;
     }

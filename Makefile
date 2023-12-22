@@ -8,8 +8,8 @@ all: $(OUT_FILE)
 main.o: main.c
 	gcc -c main.c
 
-funcs_double.o: funcs_double.c
-	gcc -c funcs_double.c
+funcs_binary.o: funcs_binary.c
+	gcc -c funcs_binary.c
 
 funcs_eight.o: funcs_eight.c
 	gcc -c funcs_eight.c
@@ -25,5 +25,5 @@ run: $(OUT_FILE)
 clean:
 	rm *.o $(OUT_FILE)
 
-$(OUT_FILE): main.o funcs_double.o funcs_eight.o funcs_sixteen.o base_funcs.o
+$(OUT_FILE): main.o funcs_binary.o funcs_eight.o funcs_sixteen.o base_funcs.o
 	gcc main.o funcs_double.o funcs_eight.o funcs_sixteen.o base_funcs.o -o $(OUT_FILE)

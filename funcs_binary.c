@@ -1,4 +1,4 @@
-#include "funcs_double.h"
+#include "funcs_binary.h"
 #include "base_funcs.h"
 
 
@@ -82,7 +82,7 @@ int convert_to_tenth(char *str,int base)
 }
 
 
-int check_is_double(char* str)
+int check_is_binary(char* str)
 {
     int length = strlen(str);
     int count_space = 0;
